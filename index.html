@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#110814" />
+  <link rel="preload" as="image" href="./assets/hero.webp" />
   <meta
     name="description"
     content="천 년의 봉인에서 깨어난 前 마왕 베리, 그녀를 지키는 리제, 그리고 인간 Guest의 기묘한 동거 이야기."
@@ -31,11 +32,10 @@
       --radius-sm: 16px;
       --max: 1180px;
 
-      --berry-image: none;
-      --rize-image: none;
+      --berry-image: url("./assets/berry.webp");
+      --rize-image: url("./assets/rize.webp");
 
-      --hero-image:
-        url("https://image.zeta-ai.io/plot-intro-image/bcd38ee4-3f30-4272-96c9-473c9df0d096/7c654cde-c74a-423d-ae13-919f989f4846.jpeg?f=jpg&q=90&w=1080");
+      --hero-image: url("./assets/hero.webp");
     }
 
     * {
@@ -546,20 +546,26 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: var(--portrait-image);
-      background-position: center top;
-      background-size: cover;
-      opacity: 1;
-      filter: saturate(.92) contrast(1.02);
+      background:
+        radial-gradient(circle at 50% 25%, rgba(194,127,255,.18), transparent 36%),
+        linear-gradient(145deg, rgba(42,21,50,.72), rgba(13,9,16,.90) 75%);
     }
 
-    .portrait.no-image::before {
-      display: none;
+    .portrait-image {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: saturate(.92) contrast(1.02);
     }
 
     .portrait-placeholder {
       position: absolute;
       inset: 0;
+      z-index: 0;
       display: grid;
       place-items: center;
       overflow: hidden;
@@ -597,7 +603,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      z-index: 2;
+      z-index: 3;
       padding: 86px 26px 26px;
       background: linear-gradient(transparent, rgba(7,4,9,.95));
     }
@@ -1377,9 +1383,15 @@
         <!-- BERRY -->
         <article class="profile active" id="profile-berry">
           <div
-            class="portrait glass no-image"
-            style="--portrait-image: var(--berry-image)"
+            class="portrait glass"
           >
+            <img
+              class="portrait-image"
+              src="./assets/berry.webp"
+              alt="베리"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
             <div class="portrait-placeholder" aria-hidden="true">
               <div class="sigil">♛</div>
             </div>
@@ -1486,9 +1498,15 @@
         <!-- RIZE -->
         <article class="profile" id="profile-rize">
           <div
-            class="portrait glass no-image"
-            style="--portrait-image: var(--rize-image)"
+            class="portrait glass"
           >
+            <img
+              class="portrait-image"
+              src="./assets/rize.webp"
+              alt="리제"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
             <div class="portrait-placeholder" aria-hidden="true">
               <div class="sigil">❖</div>
             </div>
